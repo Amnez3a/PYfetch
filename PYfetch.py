@@ -209,29 +209,18 @@ def run_args(args):
     if args.no_art:
         art = ""
     elif args.custom_art:
-        try:
-            with open(args.custom_art, "r") as f:
-                art = f.read()
-        except Exception as e:
-            print(f"Error loading custom art: {e}")
-            art = ""
+        art = args.custom_art.read_text() if args.custom_art.is_file() else print(f"Error: Custom art file '{args.custom_art}' not found.") # я не ебу зачем в одну строчку запилил
     else:
         if platform.system() == "Linux":
             art = LINUX_ASCII_ART
         elif platform.system() == "Windows":
             art = WINDOWS_ASCII_ART
-        elif platform.system() == "Darwin":
+        elif platform.system() == "Darwin": # macos
             art = MACOS_ASCII_ART
         else:
             art = ""
     
-    if args.custom_art:
-        if os.path.isfile(args.custom_art):
-            with open(args.custom_art, "r") as f:
-                art = f.read()
-        else:
-            print(f"Custom art file '{args.custom_art}' not found. Using default art.")
-            art = ""
+    return art
 
 def main():
     args = parse_args()
