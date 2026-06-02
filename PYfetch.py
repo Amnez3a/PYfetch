@@ -224,6 +224,14 @@ def run_args(args):
             art = MACOS_ASCII_ART
         else:
             art = ""
+    
+    if args.custom_art:
+        if os.path.isfile(args.custom_art):
+            with open(args.custom_art, "r") as f:
+                art = f.read()
+        else:
+            print(f"Custom art file '{args.custom_art}' not found. Using default art.")
+            art = ""
 
 def main():
     args = parse_args()
