@@ -27,6 +27,16 @@ LINUX_ASCII_ART = """\
 \\__/'---'\\__/"""
 
 
+MACOS_ASCII_ART = """\
+              .:'
+      __ :'__
+   .'`__`-'__``.
+  :__________.-'
+
+  :_________:
+   :_________`-;
+    `.__.-.__.'"""
+
 def get_cpu_model():
     try:
         with open("/proc/cpuinfo") as f:
@@ -178,6 +188,8 @@ def main():
         art = LINUX_ASCII_ART
     elif platform.system() == "Windows":
         art = WINDOWS_ASCII_ART
+    elif platform.system() == "Darwin":
+        art = MACOS_ASCII_ART
     else:
         art = ""
 
