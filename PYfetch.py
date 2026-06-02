@@ -34,7 +34,7 @@ MACOS_ASCII_ART = """\
       __ :'__
    .'`__`-'__``.
   :__________.-'
-
+  :_________: 
   :_________:
    :_________`-;
     `.__.-.__.'"""
@@ -127,6 +127,7 @@ def pc_info():
 def user_info():
     return [
         f"User:     {os.getlogin().strip()} | UID: {os.getuid()}",
+        f"Home:     {os.path.expanduser('~').strip()}",
     ]
 
 
@@ -181,9 +182,15 @@ def render(art_str, info_lines):
         right = info_lines[i] if i < len(info_lines) else ""
         print(f"{left:<{art_width}}{right}")
 
-def main():
-    args = parse_args()
-
+def run_args(args):
+    if args.logo:
+        logos = {
+            "windows": WINDOWS_ASCII_ART,
+            "linux": LINUX_ASCII_ART,
+            "macos": MACOS_ASCII_ART,
+        }
+        return logos.get(args.logo, "")
+    
     if args.only:
         valid_sections = {'pc': pc_info, 'user': user_info, 'desktop': desktop_info, 'other': other_info}
         selected = [s.strip() for s in args.only.split(",")]
@@ -197,7 +204,7 @@ def main():
                 print(f"Warning: Invalid section '{sec}' ignored.")
         render("", info_lines)
         return
-
+    
     # art
     if args.no_art:
         art = ""
@@ -218,8 +225,11 @@ def main():
         else:
             art = ""
 
+def main():
+    args = parse_args()
+    run_args(parse_args())
+    art = run_args(args)
 
-    print("PYfetch | By !amnez1a!")
     print("==" * 50)
 
     render(art, build_info_lines())
