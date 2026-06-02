@@ -1,3 +1,4 @@
+from PYfetch_args import parse_args # args
 import time
 import os
 import subprocess
@@ -5,6 +6,7 @@ import platform
 import psutil
 import shutil
 import sys
+import argparse
 from colorama import init, Fore, Back, Style
 
 init()
@@ -179,19 +181,46 @@ def render(art_str, info_lines):
         right = info_lines[i] if i < len(info_lines) else ""
         print(f"{left:<{art_width}}{right}")
 
-
 def main():
+    args = parse_args()
+
+    if args.only:
+        valid_sections = {'pc': pc_info, 'user': user_info, 'desktop': desktop_info, 'other': other_info}
+        selected = [s.strip() for s in args.only.split(",")]
+        info_lines = []
+        for sec in selected:
+            if sec in valid_sections:
+                info_lines.append(f"{Back.WHITE}{Fore.BLACK}[ {sec.upper()} INFO ]{Style.RESET_ALL}")
+                info_lines.extend(valid_sections[sec]())
+                info_lines.append("")
+            else:
+                print(f"Warning: Invalid section '{sec}' ignored.")
+        render("", info_lines)
+        return
+
+    # art
+    if args.no_art:
+        art = ""
+    elif args.custom_art:
+        try:
+            with open(args.custom_art, "r") as f:
+                art = f.read()
+        except Exception as e:
+            print(f"Error loading custom art: {e}")
+            art = ""
+    else:
+        if platform.system() == "Linux":
+            art = LINUX_ASCII_ART
+        elif platform.system() == "Windows":
+            art = WINDOWS_ASCII_ART
+        elif platform.system() == "Darwin":
+            art = MACOS_ASCII_ART
+        else:
+            art = ""
+
+
     print("PYfetch | By !amnez1a!")
     print("==" * 50)
-
-    if platform.system() == "Linux":
-        art = LINUX_ASCII_ART
-    elif platform.system() == "Windows":
-        art = WINDOWS_ASCII_ART
-    elif platform.system() == "Darwin":
-        art = MACOS_ASCII_ART
-    else:
-        art = ""
 
     render(art, build_info_lines())
     print("==" * 50)
