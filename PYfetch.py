@@ -5,7 +5,9 @@ import platform
 import psutil
 import shutil
 import sys
+from colorama import init, Fore, Back, Style
 
+init()
 
 WINDOWS_ASCII_ART = """\
        _.-;;-._
@@ -139,10 +141,10 @@ def other_info():
 
 def build_info_lines():
     sections = [
-        ("PC INFO",      pc_info()),
-        ("USER INFO",    user_info()),
-        ("DESKTOP INFO", desktop_info()),
-        ("OTHER",        other_info()),
+        (f"{Back.WHITE}{Fore.BLACK}PC INFO{Style.RESET_ALL}",      pc_info()),
+        (f"{Back.WHITE}{Fore.BLACK}USER INFO{Style.RESET_ALL}",    user_info()),
+        (f"{Back.WHITE}{Fore.BLACK}DESKTOP INFO{Style.RESET_ALL}", desktop_info()),
+        (f"{Back.WHITE}{Fore.BLACK}OTHER{Style.RESET_ALL}",        other_info()),
     ]
     lines = []
     for title, content in sections:
