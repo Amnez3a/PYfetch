@@ -6,7 +6,6 @@ import platform
 import psutil
 import shutil
 import sys
-import argparse
 from colorama import init, Fore, Back, Style
 
 init()
@@ -75,7 +74,7 @@ def get_package_count():
     for mgr, cmd in managers.items():
         if shutil.which(mgr):
             result = subprocess.run(cmd, capture_output=True, text=True)
-            lines = [l for l in result.stdout.strip().split("\n") if l]
+            lines = [line for line in result.stdout.strip().split("\n") if line]
             count = len(lines) - 1 if mgr == "apt" else len(lines)
             return f"{count} ({mgr})"
     return "Unknown"
@@ -174,7 +173,7 @@ def render(art_str, info_lines):
         return
 
     art_lines = art_str.split("\n")
-    art_width = max(len(l) for l in art_lines) + 4
+    art_width = max(len(line) for line in art_lines) + 4
 
     total = max(len(art_lines), len(info_lines))
     for i in range(total):
@@ -222,8 +221,6 @@ def run_args(args):
 
 def main():
     art, info_lines = run_args(parse_args())
-    args = parse_args()
-
     print("==" * 50)
 
     render(art, info_lines)
