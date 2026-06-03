@@ -23,6 +23,6 @@ pyfetch # пока что название будет pyFETCH, потом сме
 ```
 **Напрямую с GitHub:**
 ```bash
-git clone https://github.com/Amnez3a/PYfetch/releases/download/v0.9.0/PYfetch # бинарный файл
+git clone https://github.com/Amnez3a/PYfetch/releases/download/release_ver/PYfetch # бинарный файл
 sudo mv PYfetch /usr/local/bin/ # /bin/ || ~/.local/bin/
 ```
