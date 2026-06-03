@@ -1,4 +1,4 @@
-from PYfetch_args import parse_args # args
+from pyneofetch_args import parse_args # args
 import time
 import os
 import subprocess
