@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: pip install pyinstaller psutil
       - name: Build binary
-        run: pyinstaller --onefile PYfetch.py
+        run: pyinstaller --onefile pyneofetch.py
       - name: Build package
         run: |
           pip install build
@@ -37,4 +37,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.version }}
-          files: dist/PYfetch
+          files: dist/pyneofetch
