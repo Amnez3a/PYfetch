@@ -28,11 +28,12 @@ jobs:
       - name: Build package
         run: |
           pip install build
-          python -m build
+          python -m build --output pypi-dist/
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+          packages-dir: pypi-dist/
           skip-existing: true
       - name: Create Release
         uses: softprops/action-gh-release@v2
