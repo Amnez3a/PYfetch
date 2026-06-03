@@ -28,7 +28,7 @@ jobs:
       - name: Build package
         run: |
           pip install build
-          python -m build --output pypi-dist/
+          python -m build --outdir pypi-dist/
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
