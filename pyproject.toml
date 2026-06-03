@@ -7,12 +7,11 @@ py-modules = ["PYfetch", "PYfetch_args"]
 
 [project]
 name = "pyneofetch"
-version = "0.1.0"
+version = "0.1.1"
 description = "A simple system information fetcher for Python."
+readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["psutil"]
 
 [project.scripts]
 pyfetch = "PYfetch:main"
-
-readme = "README.md"
