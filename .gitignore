@@ -1,12 +1,18 @@
-venv/
-.venv/
-
 __pycache__/
+*.pyc
+*.pyo
 .pytest_cache/
-.pyc
 
-build/
+.venv/
+venv/
+
 dist/
-.egg-info/
+build/
+*.egg-info/
 
 *.spec
+
+.env
+
+.vscode/
+.idea/

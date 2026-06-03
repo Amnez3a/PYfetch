@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
@@ -16,3 +18,7 @@ jobs:
       run: ruff check .
     - name: Run tests
       run: pytest test_pyfetch.py -v
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/PYfetch
