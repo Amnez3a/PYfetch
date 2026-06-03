@@ -1,4 +1,4 @@
-# PYfetch
+# PYneofetch
 ## Подобная программа fastfetch'а на python
 ***
 **Использование:**
@@ -20,9 +20,4 @@ PYfetch.py [-h] [--only {pc,user,desktop,other}] [--no-art] [--custom-art CUSTOM
 ```bash
 pip install pyneofetch --break-system-packages
 pyfetch # пока что название будет pyFETCH, потом сменю
-```
-**Напрямую с GitHub:**
-```bash
-git clone https://github.com/Amnez3a/PYfetch/releases/download/release_ver/PYfetch # бинарный файл
-sudo mv PYfetch /usr/local/bin/ # /bin/ || ~/.local/bin/
 ```
