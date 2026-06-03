@@ -14,3 +14,5 @@ dependencies = ["psutil"]
 
 [project.scripts]
 pyfetch = "PYfetch:main"
+
+readme = "README.md"

@@ -1,12 +1,10 @@
 name: Create tag and build release
-
 on:
   workflow_dispatch:
     inputs:
       version:
         description: "Version (e.g. v0.2.0)"
         required: true
-
 jobs:
   create_tag:
     permissions:
