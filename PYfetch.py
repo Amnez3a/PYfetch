@@ -30,7 +30,7 @@ LINUX_ASCII_ART = """\
 
 
 MACOS_ASCII_ART = """\
-              .:'
+          .:'
       __ :'__
    .'`__`-'__``.
   :__________.-'
@@ -148,7 +148,7 @@ def desktop_info():
 
 def other_info():
     return [
-        f"Python:   {sys.version.split()[0]}",
+        f"{Back.YELLOW}{Fore.BLACK}Python:   {sys.version.split()[0]}{Style.RESET_ALL}",
     ]
 
 
@@ -183,13 +183,14 @@ def render(art_str, info_lines):
         print(f"{left:<{art_width}}{right}")
 
 def run_args(args):
+    info_lines = build_info_lines()
     if args.logo:
         logos = {
             "windows": WINDOWS_ASCII_ART,
             "linux": LINUX_ASCII_ART,
             "macos": MACOS_ASCII_ART,
         }
-        return logos.get(args.logo, "")
+        return logos.get(args.logo, ""), info_lines
     
     if args.only:
         valid_sections = {'pc': pc_info, 'user': user_info, 'desktop': desktop_info, 'other': other_info}
@@ -202,8 +203,6 @@ def run_args(args):
                 info_lines.append("")
             else:
                 print(f"Warning: Invalid section '{sec}' ignored.")
-        render("", info_lines)
-        return
     
     # art
     if args.no_art:
@@ -219,17 +218,15 @@ def run_args(args):
             art = MACOS_ASCII_ART
         else:
             art = ""
-    
-    return art
+    return art, info_lines
 
 def main():
+    art, info_lines = run_args(parse_args())
     args = parse_args()
-    run_args(parse_args())
-    art = run_args(args)
 
     print("==" * 50)
 
-    render(art, build_info_lines())
+    render(art, info_lines)
     print("==" * 50)
 
 
